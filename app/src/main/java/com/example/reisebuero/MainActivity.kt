@@ -25,7 +25,9 @@ class MainActivity : AppCompatActivity() {
         }
 
         val cityList = Datasource().loadCities()
-        vb.rvCities.adapter = CityAdapter(cityList)
+        vb.rvCities.adapter = CityAdapter(cityList, this)
         vb.rvCities.setHasFixedSize(true)
+
+
     }
 }

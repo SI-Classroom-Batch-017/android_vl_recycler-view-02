@@ -1,14 +1,17 @@
 package com.example.adapter
 
 import android.content.Context
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.data.model.City
+import com.example.reisebuero.CityDetail
 import com.example.reisebuero.databinding.ListItemBinding
 
 class CityAdapter(
-    val cityList: List<City>
+    private val cityList: List<City>,
+    private val context: Context
 ): RecyclerView.Adapter<CityAdapter.CityItemViewHolder>() {
 
     inner class CityItemViewHolder(val binding: ListItemBinding): RecyclerView.ViewHolder(binding.root)
@@ -75,5 +78,12 @@ class CityAdapter(
         val city = cityList[position]
         holder.binding.tvCity.text = city.name
         holder.binding.ivCitiy.setImageResource(city.imageRes)
+
+        holder.binding.root.setOnClickListener {
+            val intent = Intent(context, CityDetail::class.java)
+            intent.putExtra("HEX_HEX", city.name)
+            intent.putExtra("CITY_IMAGE_RES", city.imageRes)
+            context.startActivity(intent)
+        }
     }
 }
